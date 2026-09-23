@@ -4,7 +4,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bill Breaker — Split the bill, not the friendship</title>
+  <title>Bill Breaker — Your Bills, Simplified</title>
+  <meta name="description" content="A simple way to split bills, track expenses, and see who paid what.">
+  <link rel="canonical" href="https://what.is.billbreaker.in/">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bill Breaker">
+  <meta property="og:url" content="https://what.is.billbreaker.in/">
+  <meta property="og:title" content="Bill Breaker — Your Bills, Simplified">
+  <meta property="og:description" content="A simple way to split bills, track expenses, and see who paid what.">
+  <meta property="og:image" content="https://what.is.billbreaker.in/og-image-2.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Bill Breaker — Your Bills, Simplified">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://what.is.billbreaker.in/">
+  <meta name="twitter:title" content="Bill Breaker — Your Bills, Simplified">
+  <meta name="twitter:description" content="A simple way to split bills, track expenses, and see who paid what.">
+  <meta name="twitter:image" content="https://what.is.billbreaker.in/og-image-2.png">
+  <meta name="twitter:image:alt" content="Bill Breaker — Your Bills, Simplified">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icon .png">
+  <link rel="shortcut icon" type="image/png" href="assets/icon .png">
+  <link rel="apple-touch-icon" href="assets/icon .png">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://what.is.billbreaker.in/#website",
+        "url": "https://what.is.billbreaker.in/",
+        "name": "Bill Breaker",
+        "description": "A simple way to split bills, track expenses, and see who paid what."
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://what.is.billbreaker.in/#webpage",
+        "url": "https://what.is.billbreaker.in/",
+        "name": "Bill Breaker — Your Bills, Simplified",
+        "description": "A simple way to split bills, track expenses, and see who paid what.",
+        "isPartOf": {
+          "@id": "https://what.is.billbreaker.in/#website"
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -101,6 +154,7 @@
     .topbar .mark {
       display: inline-flex;
       align-items: center;
+      pointer-events: auto;
     }
 
     .topbar .mark img {
@@ -116,6 +170,11 @@
       padding: 9px 14px;
       border-radius: 2px;
       transition: all 0.3s ease;
+      pointer-events: auto;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
     }
 
     .topbar:not(.scrolled) .tagline {
@@ -126,6 +185,18 @@
     .topbar.scrolled .tagline {
       background: var(--black);
       color: #B8B8B4;
+    }
+
+    .topbar:not(.scrolled) .tagline:hover {
+      background: #EFEFEA;
+      color: var(--black);
+      transform: translateY(-1px);
+    }
+
+    .topbar.scrolled .tagline:hover {
+      background: #1C1C1A;
+      color: var(--white);
+      transform: translateY(-1px);
     }
 
     @media (max-width:640px) {
@@ -456,7 +527,7 @@
 
     .method-card:hover {
       background: var(--paper);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
       transform: translateY(-3px);
     }
 
@@ -468,6 +539,7 @@
         opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
         transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
+
     .method-head-animate.in-view {
       opacity: 1;
       transform: translateY(0);
@@ -1084,15 +1156,33 @@
     [data-anim] {
       opacity: 0;
       transition:
-        opacity  0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
         transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    [data-anim="fade-up"]    { transform: translateY(30px); }
-    [data-anim="fade-down"]  { transform: translateY(-24px); }
-    [data-anim="fade-left"]  { transform: translateX(-30px); }
-    [data-anim="fade-right"] { transform: translateX(30px); }
-    [data-anim="scale-in"]   { transform: scale(0.91); }
-    [data-anim="fade-in"]    { transform: none; }
+
+    [data-anim="fade-up"] {
+      transform: translateY(30px);
+    }
+
+    [data-anim="fade-down"] {
+      transform: translateY(-24px);
+    }
+
+    [data-anim="fade-left"] {
+      transform: translateX(-30px);
+    }
+
+    [data-anim="fade-right"] {
+      transform: translateX(30px);
+    }
+
+    [data-anim="scale-in"] {
+      transform: scale(0.91);
+    }
+
+    [data-anim="fade-in"] {
+      transform: none;
+    }
 
     [data-anim].revealed {
       opacity: 1;
@@ -1100,15 +1190,36 @@
     }
 
     /* --- Hero staggered load (fires on DOMContentLoaded, no scroll) --- */
-    .hero-eyebrow  { animation: heroStagger 0.7s cubic-bezier(0.22,1,0.36,1) 0.05s both; }
-    .hero-h1       { animation: heroStagger 0.7s cubic-bezier(0.22,1,0.36,1) 0.18s both; }
-    .hero-lede     { animation: heroStagger 0.7s cubic-bezier(0.22,1,0.36,1) 0.30s both; }
-    .hero-cta-wrap { animation: heroStagger 0.7s cubic-bezier(0.22,1,0.36,1) 0.42s both; }
-    .hero-note-txt { animation: heroStagger 0.7s cubic-bezier(0.22,1,0.36,1) 0.54s both; }
+    .hero-eyebrow {
+      animation: heroStagger 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+    }
+
+    .hero-h1 {
+      animation: heroStagger 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+    }
+
+    .hero-lede {
+      animation: heroStagger 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.30s both;
+    }
+
+    .hero-cta-wrap {
+      animation: heroStagger 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+    }
+
+    .hero-note-txt {
+      animation: heroStagger 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.54s both;
+    }
 
     @keyframes heroStagger {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ── MICRO INTERACTIONS ──────────────────────────────────── */
@@ -1118,23 +1229,33 @@
       position: relative;
       overflow: hidden;
     }
+
     .btn.primary::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.22) 55%, transparent 65%);
+      background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.22) 55%, transparent 65%);
       transform: translateX(-100%);
       transition: transform 0.45s ease;
     }
-    .btn.primary:hover::after { transform: translateX(100%); }
-    .btn.primary:hover        { background: #DEDEDC; }
+
+    .btn.primary:hover::after {
+      transform: translateX(100%);
+    }
+
+    .btn.primary:hover {
+      background: #DEDEDC;
+    }
 
     /* Button: arrow slides right on hover */
     .btn .arrow {
       display: inline-block;
       transition: transform 0.25s ease;
     }
-    .btn:hover .arrow { transform: translateX(4px); }
+
+    .btn:hover .arrow {
+      transform: translateX(4px);
+    }
 
     /* Scroll-progress tape */
     .tape {
@@ -1145,23 +1266,27 @@
     .problem-cell {
       transition: background 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
     }
+
     .problem-cell:hover {
       background: var(--paper);
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
     }
 
     /* How-it-works steps — slide + number pulse */
     .step {
       transition: background 0.2s ease, transform 0.25s ease;
     }
+
     .step:hover {
       background: var(--paper);
       transform: translateX(4px);
     }
+
     .step:hover .step-num {
       color: var(--black);
     }
+
     .step-num {
       transition: color 0.2s ease;
     }
@@ -1171,6 +1296,7 @@
       transition: background 0.18s ease, transform 0.2s ease, color 0.18s ease;
       cursor: default;
     }
+
     .field-chip:hover {
       transform: scale(1.04);
       background: var(--black);
@@ -1182,61 +1308,87 @@
       transition: background 0.2s ease;
       position: relative;
     }
+
     .diff-row::before {
       content: '';
       position: absolute;
-      left: 0; top: 0; bottom: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
       width: 0;
       background: var(--black);
       transition: width 0.25s ease;
     }
-    .diff-row:hover { background: rgba(0,0,0,0.03); }
-    .diff-row:hover::before { width: 3px; }
+
+    .diff-row:hover {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .diff-row:hover::before {
+      width: 3px;
+    }
 
     /* Versus cards — lift */
     .versus-card {
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
+
     .versus-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     }
 
     /* Pills — subtle scale */
     .pill {
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
     .pill:hover {
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     }
 
     /* Vision nodes — grow number */
     .vision-node {
       transition: transform 0.25s ease;
     }
-    .vision-node:hover { transform: translateY(-3px); }
+
+    .vision-node:hover {
+      transform: translateY(-3px);
+    }
+
     .vision-node:hover .n {
       color: var(--black);
     }
+
     .vision-node .n {
       transition: color 0.2s ease;
     }
 
     /* Links — underline grows from left */
-    footer a, .section-head a, .calc-note a {
+    footer a,
+    .section-head a,
+    .calc-note a {
       position: relative;
       text-decoration: none;
     }
-    footer a::after, .section-head a::after, .calc-note a::after {
+
+    footer a::after,
+    .section-head a::after,
+    .calc-note a::after {
       content: '';
       position: absolute;
-      left: 0; bottom: -1px;
-      width: 0; height: 1px;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
       background: currentColor;
       transition: width 0.28s ease;
     }
-    footer a:hover::after, .section-head a:hover::after, .calc-note a:hover::after {
+
+    footer a:hover::after,
+    .section-head a:hover::after,
+    .calc-note a:hover::after {
       width: 100%;
     }
 
@@ -1244,6 +1396,7 @@
     .checklist li {
       transition: transform 0.2s ease, color 0.2s ease;
     }
+
     .checklist li:hover {
       transform: translateX(4px);
       color: var(--black);
@@ -1253,24 +1406,29 @@
     .quote-block {
       transition: transform 0.3s ease;
     }
-    .quote-block:hover { transform: scale(1.01); }
+
+    .quote-block:hover {
+      transform: scale(1.01);
+    }
 
     /* Calc box — glow border on hover */
     .calc-box {
       transition: border-color 0.25s ease, box-shadow 0.25s ease;
     }
+
     .calc-box:hover {
       border-color: var(--black);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
     }
 
     /* Boundary note — subtle lift */
     .boundary-note {
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
+
     .boundary-note:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1306,15 +1464,17 @@
 
   <div class="topbar">
     <div class="mark"><img src="assets/White_logo.png" alt="Bill Breaker"></div>
-    <div class="tagline mono">Product By Gaurav</div>
+    <a href="https://gauravbhatti.in/" target="_blank" rel="noopener" class="tagline mono">Product By Gaurav</a>
   </div>
 
   <!-- HERO -->
   <header class="hero">
     <div class="hero-copy">
-      <div class="eyebrow hero-eyebrow"><a href="https://billbreaker.in" target="_blank" rel="noopener">billbreaker.in</a></div>
+      <div class="eyebrow hero-eyebrow"><a href="https://billbreaker.in" target="_blank"
+          rel="noopener">billbreaker.in</a></div>
       <h1 class="hero-h1">Split the bill,<br>not the <em>friendship.</em></h1>
-      <p class="lede hero-lede">Bill Breaker scans a restaurant receipt, reads every item on it, and lets your group decide
+      <p class="lede hero-lede">Bill Breaker scans a restaurant receipt, reads every item on it, and lets your group
+        decide
         exactly who owes what — no manual entry, no awkward math at the table.</p>
       <div class="hero-cta hero-cta-wrap">
         <button class="btn primary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See how
@@ -1338,9 +1498,11 @@
   <!-- WHAT IS BILL BREAKER -->
   <section id="what">
     <div class="define-block">
-      <p class="lead-define" data-anim="fade-up" data-delay="0ms">Bill Breaker is an AI-powered bill splitting app that scans a restaurant bill, extracts the
+      <p class="lead-define" data-anim="fade-up" data-delay="0ms">Bill Breaker is an AI-powered bill splitting app that
+        scans a restaurant bill, extracts the
         items and charges, and lets a group decide exactly who should pay for what.</p>
-      <p class="sub-define mono" data-anim="fade-up" data-delay="120ms">From receipt to final split — without manually entering the entire bill.</p>
+      <p class="sub-define mono" data-anim="fade-up" data-delay="120ms">From receipt to final split — without manually
+        entering the entire bill.</p>
     </div>
   </section>
 
@@ -1541,7 +1703,8 @@
       Items assigned to person <span class="op">+</span> applicable share of taxes/charges <span class="op">−</span>
       applicable discounts <span class="op">=</span> person's final payable amount
     </div>
-    <p class="calc-note" data-anim="fade-up" data-delay="180ms">The final bill summary reflects the CGST, SGST, service charge / service tax and discounts
+    <p class="calc-note" data-anim="fade-up" data-delay="180ms">The final bill summary reflects the CGST, SGST, service
+      charge / service tax and discounts
       actually extracted from that bill — not a fixed or assumed rate.</p>
     <div class="after-split" data-anim="fade-up" data-delay="240ms">
       <strong>What happens after the split.</strong> Bill Breaker calculates the exact amount each person owes. Users
@@ -1556,15 +1719,20 @@
       <p>Not once-a-year trip planners — the people who owe each other money constantly.</p>
     </div>
     <div class="chips-row">
-      <div class="pill pill-use" data-anim="fade-up" data-delay="0ms">Friends <span class="arrow-mini">→</span><span class="use">restaurant dinners</span>
+      <div class="pill pill-use" data-anim="fade-up" data-delay="0ms">Friends <span class="arrow-mini">→</span><span
+          class="use">restaurant dinners</span>
       </div>
-      <div class="pill pill-use" data-anim="fade-up" data-delay="60ms">College students <span class="arrow-mini">→</span><span class="use">group
+      <div class="pill pill-use" data-anim="fade-up" data-delay="60ms">College students <span
+          class="arrow-mini">→</span><span class="use">group
           outings</span></div>
-      <div class="pill pill-use" data-anim="fade-up" data-delay="120ms">Roommates <span class="arrow-mini">→</span><span class="use">shared expenses</span>
+      <div class="pill pill-use" data-anim="fade-up" data-delay="120ms">Roommates <span class="arrow-mini">→</span><span
+          class="use">shared expenses</span>
       </div>
-      <div class="pill pill-use" data-anim="fade-up" data-delay="180ms">Travel groups <span class="arrow-mini">→</span><span class="use">shared meals &amp;
+      <div class="pill pill-use" data-anim="fade-up" data-delay="180ms">Travel groups <span
+          class="arrow-mini">→</span><span class="use">shared meals &amp;
           expenses</span></div>
-      <div class="pill pill-use" data-anim="fade-up" data-delay="240ms">Office groups <span class="arrow-mini">→</span><span class="use">lunches &amp; team
+      <div class="pill pill-use" data-anim="fade-up" data-delay="240ms">Office groups <span
+          class="arrow-mini">→</span><span class="use">lunches &amp; team
           outings</span></div>
       <div class="pill" data-anim="fade-up" data-delay="300ms">Interns</div>
     </div>
@@ -1632,7 +1800,8 @@
       <h2>Live today. Building version 2.0.</h2>
       <p>Bill Breaker is already in people's hands at billbreaker.in — this is what's shipped versus what's next.</p>
     </div>
-    <div class="status-line" data-anim="fade-up" data-delay="80ms"><span class="status-dot"></span><span>Live at billbreaker.in · actively used</span></div>
+    <div class="status-line" data-anim="fade-up" data-delay="80ms"><span class="status-dot"></span><span>Live at
+        billbreaker.in · actively used</span></div>
     <div class="avail-wrap">
       <div class="avail-col" data-anim="fade-right" data-delay="120ms">
         <span class="col-label mono">Available today</span>
@@ -1698,7 +1867,8 @@
     <div class="section-head" data-anim="fade-up" data-delay="0ms">
       <h2>Why we built Bill Breaker.</h2>
     </div>
-    <p data-anim="fade-up" data-delay="100ms">Splitting a restaurant bill becomes unnecessarily complicated when everyone orders different things. Existing
+    <p data-anim="fade-up" data-delay="100ms">Splitting a restaurant bill becomes unnecessarily complicated when
+      everyone orders different things. Existing
       solutions often require users to manually recreate the expense. Bill Breaker was built to start with the bill
       itself and turn it into a fair, editable split.</p>
   </section>
@@ -1768,7 +1938,7 @@
       const methodSection = document.getElementById('split-methods');
       if (methodSection) {
         const headEl = methodSection.querySelector('.method-head-animate');
-        const cards  = methodSection.querySelectorAll('.method-card');
+        const cards = methodSection.querySelectorAll('.method-card');
 
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
